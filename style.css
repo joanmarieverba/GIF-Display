@@ -1,0 +1,39 @@
+body {
+    background-image: url("starry-sky.jpg");
+    min-height: 100%;
+}
+
+.container {
+    padding-top: 75px;
+}
+
+h1 {
+    color: midnightblue;
+    font-family: 'Orbitron';
+    font-size: 48px;
+    text-align: center;
+    padding-left: 10px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+
+h2, h3 {
+    color: midnightblue;
+    font-family: 'Roboto';
+    font-size: 22px;
+    text-align: center;
+    font-weight: bold;
+}
+
+h4 {
+    font-family: 'Georgia', serif;
+    font-weight: normal;
+    padding-top: 0;
+}
+
+.btnstart {
+    margin-top: 5vw;
+    margin-left: 30vw;
+    width: 190px;
+}
