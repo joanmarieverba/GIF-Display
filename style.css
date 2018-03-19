@@ -3,8 +3,9 @@ body {
     min-height: 100%;
 }
 
-.container {
-    padding-top: 75px;
+.topbuttons {
+    margin-top: 75px;
+    margin-left: 25px;
 }
 
 h1 {
@@ -19,10 +20,9 @@ h1 {
 
 
 h2, h3 {
-    color: midnightblue;
+    color: yellow;
     font-family: 'Roboto';
     font-size: 22px;
-    text-align: center;
     font-weight: bold;
 }
 
@@ -32,8 +32,8 @@ h4 {
     padding-top: 0;
 }
 
-.btnstart {
-    margin-top: 5vw;
-    margin-left: 30vw;
-    width: 190px;
+.inputbutton {
+    margin-top: 5px;
+    float: right;
+    margin-right: 10px;
 }
