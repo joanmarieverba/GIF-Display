@@ -1,57 +1,45 @@
       "use strict";
       
       // Initial array of items
-      var items = ["Astronomy", "Planet", "Star", "Books"];
+      var items = ["literature", "library", "books", "bookstore", "author", "fantasy"];
 
       // displayMovieInfo function re-renders the HTML to display the appropriate content
       function displayGIFs() {
 
-        var item = $(this).attr("data-name");
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + item + "&api_key=Ebv1xRbHRFV9SafJDmTUY22Qy0LWjZzs&limit=12";
+       let item = $(this).attr("data-name");
+       console.log("data-name ", item);
 
+        let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + item + "&api_key=Ebv1xRbHRFV9SafJDmTUY22Qy0LWjZzs&limit=12";
+        console.log(queryURL);
         // Creates AJAX call for the specific movie button being clicked
         $.ajax({
           url: queryURL,
           method: "GET"
         }).then(function(response) {
             console.log(response);
-          // Creating a div to hold the movie (automatically supplies the </div> at the end)
-         // var movieDiv = $("<div class='movie'>");
+            console.log(response.data[0].rating);
+          // // Creating a div to hold the gif (automatically supplies the </div> at the end)
+          // let gifDiv = $("<div class='picture'>");
 
-          // Storing the rating data
-          //var rating = response.Rated;
-          // Creating an element to have the rating displayed
-          //var pOne = $("<p>").text("Rating: " + rating);
-          // Displaying the rating
-          //movieDiv.append(pOne);
+          // //  Storing the rating data
+          // let gifRating = response.data[0].rating;
+          // // Creating an element to have the rating displayed
+          // let aboveGIF = $("<p>").text(`Rating: ${gifRating}`);
+          // // Displaying the rating
+          // gifDiv.append(aboveGIF);
 
-          // Storing the release year
-          //var released = response.Released;
-          // Creating an element to hold the release year
-         // var pTwo = $("<p>").text("Released: " + released);
-          // Displaying the release year
-          //movieDiv.append(pTwo);
+          // // Retrieving the URL for the gif
+          // let imgURL = response.data[0].bitly_gif.url;
+          // // Creating an element to hold the image
+          // let image = $("<img>").attr("src", imgURL);
+          // // Appending the image
+          // gifDiv.append(image);
 
-          // Storing the plot
-          //var plot = response.Plot;
-          // Creating an element to hold the plot
-          //var pThree = $("<p>").text("Plot: " + plot);
-          // Appending the plot
-          //movieDiv.append(pThree);
+          // //clear previous input 
+          // $("#thegifs").empty();
 
-          // Retrieving the URL for the image
-          //var imgURL = response.Poster;
-          // Creating an element to hold the image
-          //var image = $("<img>").attr("src", imgURL);
-          // Appending the image
-          //movieDiv.append(image);
-
-          //clear previous input 
-          $("#spacegif").empty();
-
-          // Putting the entire movie above the previous movies
-          //$("#movies-view").prepend(movieDiv);
-          //$("#movies-view").append(movieDiv);
+          // // Putting the gif on the page
+          // $("#thegifs").append(gifDiv);
         });
 
       }
@@ -70,7 +58,7 @@
           // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
           var a = $("<button>");
           // Adds a class of movie to our button
-          a.addClass("listitem");
+          a.addClass("topbuttons");
           // Added a data-attribute
           a.attr("data-name", items[i]);
           // Provided the initial button text
@@ -80,7 +68,7 @@
         }
       }
 
-      // This function handles events where the add movie button is clicked
+      // This function handles events where the add category button is clicked
       $("#addcategory").on("click", function(event) {
         event.preventDefault();
         // This line of code will grab the input from the textbox
@@ -94,7 +82,7 @@
 
       });
 
-      // Adding click event listeners to all elements with a class of "movie"
+      // Adding click event listeners to all elements with a class of "btnform"
       $(document).on("click", "#btnform", displayGIFs);
 
       // Calling the renderButtons function to display the intial buttons
