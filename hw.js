@@ -32,7 +32,7 @@
       // $(".topbuttons").click(function () {
       //   let data = $(this).attr("data-name");
       //   console.log("top button clicked");
-      //   displayGIFs(data);
+      //   displayGIFs();
       // })
       $(document).on("click", ".topbuttons", displayGIFs);
 
@@ -43,7 +43,7 @@
        let item = $(this).attr("data-name");
        console.log("data-name ", item);
 
-        let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + item + "&api_key=Ebv1xRbHRFV9SafJDmTUY22Qy0LWjZzs&limit=12";
+        let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + item + "&api_key=Ebv1xRbHRFV9SafJDmTUY22Qy0LWjZzs&limit=10";
         console.log(queryURL);
         // Creates AJAX call for the specific button being clicked
         $.ajax({
@@ -54,21 +54,24 @@
           // Creating a div to hold the gif (automatically supplies the </div> at the end)
           let gifDiv = $("<div class='picture'>");
 
-          for (var i = 0; i < 12; i++) {
+          for (var i = 0; i < 10; i++) {
 
+            let gifsDiv = $("<div class='gifimage'>");
             //  Storing the rating data
             let gifRating = response.data[i].rating;
             // Creating an element to have the rating displayed
             let aboveGIF = $("<p>").text(`Rating: ${gifRating}`);
             // Displaying the rating
-            gifDiv.append(aboveGIF);
+            gifsDiv.append(aboveGIF);
+
 
             // Retrieving the URL for the gif
-            let imgURL = response.data[i].images.fixed_height.url;
+            let imgURL = response.data[i].images.original_still.url;
             // Creating an element to hold the image
             let image = $("<img>").attr("src", imgURL);
             // Appending the image
-            gifDiv.append(image);
+            gifsDiv.append(image);
+            gifDiv.append(gifsDiv);
           }
 
           //clear previous input 
@@ -89,7 +92,7 @@
         // The item from the textbox is then added to our array
         items.push(iteminput);
 
-        let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + iteminput + "&api_key=Ebv1xRbHRFV9SafJDmTUY22Qy0LWjZzs&limit=12";
+        let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + iteminput + "&api_key=Ebv1xRbHRFV9SafJDmTUY22Qy0LWjZzs&limit=10";
         console.log(queryURL);
         // Creates AJAX call for the specific button being clicked
         $.ajax({
@@ -101,7 +104,7 @@
           // Creating a div to hold the gif (automatically supplies the </div> at the end)
           let gifDiv = $("<div class='picture'>");
 
-          for (var i = 0; i < 12; i++) {
+          for (var i = 0; i < 10; i++) {
 
             //  Storing the rating data
             let gifRating = response.data[i].rating;
