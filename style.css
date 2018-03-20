@@ -1,5 +1,5 @@
 body {
-    background-image: url("bookshelf.jpg");
+    background-image: url("starry-sky.jpg");
     min-height: 100%;
 }
 
@@ -36,4 +36,13 @@ h4 {
     margin-top: 5px;
     float: right;
     margin-right: 10px;
+}
+
+.picture {
+    color: yellow;
+    font-family: 'Roboto';
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 10px;
+    display: inline-block;
 }
