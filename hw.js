@@ -1,5 +1,5 @@
       "use strict";
-      
+
       // Initial array of items
       let items = ["astronomy", "space", "satellite", "astronaut", "moon", "star", "aurora", "planet"];
 
@@ -56,13 +56,13 @@
 
           for (var i = 0; i < 10; i++) {
 
-            let gifsDiv = $("<div class='gifimage'>");
+            let gifAndRatingDiv = $("<div class='gifplusrating'>");
             //  Storing the rating data
             let gifRating = response.data[i].rating;
             // Creating an element to have the rating displayed
             let aboveGIF = $("<p>").text(`Rating: ${gifRating}`);
             // Displaying the rating
-            gifsDiv.append(aboveGIF);
+            gifAndRatingDiv.append(aboveGIF);
 
 
             // Retrieving the URL for the gif
@@ -70,11 +70,13 @@
             // Creating an element to hold the image
             let image = $("<img>").attr("src", imgURL);
             // Appending the image
-            gifsDiv.append(image);
-            gifDiv.append(gifsDiv);
+            gifAndRatingDiv.append(image);
+            
+            gifDiv.append(gifAndRatingDiv);
+
           }
 
-          //clear previous input 
+          //clear previous input
           $("#thegifs").empty();
 
           // Putting the gif on the page
@@ -106,22 +108,26 @@
 
           for (var i = 0; i < 10; i++) {
 
+            let gifAndRatingDiv = $("<div class='gifplusrating'>");
             //  Storing the rating data
             let gifRating = response.data[i].rating;
             // Creating an element to have the rating displayed
             let aboveGIF = $("<p>").text(`Rating: ${gifRating}`);
             // Displaying the rating
-            gifDiv.append(aboveGIF);
+            gifAndRatingDiv.append(aboveGIF);
+
 
             // Retrieving the URL for the gif
-            let imgURL = response.data[i].images.fixed_height.url;
+            let imgURL = response.data[i].images.original_still.url;
             // Creating an element to hold the image
             let image = $("<img>").attr("src", imgURL);
             // Appending the image
-            gifDiv.append(image);
+            gifAndRatingDiv.append(image);
+
+            gifDiv.append(gifAndRatingDiv);
           }
 
-          //clear previous input 
+          //clear previous input
           $("#thegifs").empty();
 
           // Putting the gifs on the page
@@ -129,7 +135,6 @@
         });
 
 
-        // Calling renderButtons which adds the button to the top 
+        // Calling renderButtons which adds the button to the top
         renderButtons();
       });
-

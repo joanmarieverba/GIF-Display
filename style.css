@@ -32,8 +32,14 @@ h4 {
     padding-top: 0;
 }
 
-.gifimage {
+.gifplusrating {
        display: inline-block; 
+       margin-left: 10px;
+}
+
+img {
+    height: 250px;
+    width: 250px;
 }
 
 .inputbutton {
