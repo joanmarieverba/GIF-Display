@@ -24,16 +24,10 @@
           a.text(items[i]);
           // Added the button to the buttons-view div
           $("#gifbuttons").append(a);
-        }
-      }
+        };
+      };
       renderButtons();
 
-      //when one of the top buttons are clicked
-      // $(".topbuttons").click(function () {
-      //   let data = $(this).attr("data-name");
-      //   console.log("top button clicked");
-      //   displayGIFs();
-      // })
       $(document).on("click", ".topbuttons", displayGIFs);
 
 
@@ -68,13 +62,13 @@
             // Retrieving the URL for the gif
             let imgURL = response.data[i].images.original_still.url;
             // Creating an element to hold the image
-            let image = $("<img>").attr("src", imgURL);
+            let image = $("<img>").attr("src", imgURL).addClass("clickimage").attr("gifindex", i).attr("item-name", item).attr("still", 1);
             // Appending the image
             gifAndRatingDiv.append(image);
-            
+       
             gifDiv.append(gifAndRatingDiv);
 
-          }
+          };
 
           //clear previous input
           $("#thegifs").empty();
@@ -83,7 +77,7 @@
           $("#thegifs").append(gifDiv);
         });
 
-      }
+      };
 
       // This function handles events where the add category button is clicked
       $("#addcategory").on("click", function(event) {
@@ -120,12 +114,13 @@
             // Retrieving the URL for the gif
             let imgURL = response.data[i].images.original_still.url;
             // Creating an element to hold the image
-            let image = $("<img>").attr("src", imgURL);
+            let image = $("<img>").attr("src", imgURL).addClass("clickimage").attr("gifindex", i).attr("item-name", iteminput).attr("still", 1);
             // Appending the image
             gifAndRatingDiv.append(image);
 
             gifDiv.append(gifAndRatingDiv);
-          }
+ 
+          };
 
           //clear previous input
           $("#thegifs").empty();
@@ -138,3 +133,72 @@
         // Calling renderButtons which adds the button to the top
         renderButtons();
       });
+
+
+$(document).on("click", ".clickimage", switchGIFs);
+
+
+// displayGIFs function re-renders the HTML to display the appropriate content
+function switchGIFs() {
+
+  let item = $(this).attr("item-name");
+  console.log("item-name ", item);
+  let n = $(this).attr("gifindex");
+  console.log("image clicked, ", n);
+  let whichGIF = $(this).attr("still");
+  console.log("Switch or not? ", whichGIF);
+
+  let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + item + "&api_key=Ebv1xRbHRFV9SafJDmTUY22Qy0LWjZzs&limit=10";
+  console.log(queryURL);
+  // Creates AJAX call for the specific button being clicked
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (response) {
+
+    // Creating a div to hold the gif (automatically supplies the </div> at the end)
+    let gifDiv = $("<div class='picture'>");
+    console.log ("here");
+    for (var i = 0; i < 10; i++) {
+
+      let gifAndRatingDiv = $("<div class='gifplusrating'>");
+      //  Storing the rating data
+      let gifRating = response.data[i].rating;
+      // Creating an element to have the rating displayed
+      let aboveGIF = $("<p>").text(`Rating: ${gifRating}`);
+      // Displaying the rating
+      gifAndRatingDiv.append(aboveGIF);
+      console.log("rating");
+
+      // Retrieving the URL for the gif image
+      if (i === n && switchGIF === 1) {
+        //insert the animated image
+        let imgURL = response.data[i].images.fixed_height.url;
+        // Creating an element to hold the image
+        let image = $("<img>").attr("src", imgURL).addClass("clickimage").attr("gifindex", i).attr("item-name", item).attr("still", 0);
+        console.log("if");
+      } else {
+        //insert the still image
+        let imgURL = response.data[i].images.original_still.url;
+        // Creating an element to hold the image
+        let image = $("<img>").attr("src", imgURL).addClass("clickimage").attr("gifindex", i).attr("item-name", item).attr("still", 1);
+        console.log("else", image);
+      };
+      console.log("imageswitch ", image);
+      
+      // Appending the image
+      gifAndRatingDiv.append(image);
+
+      gifDiv.append(gifAndRatingDiv);
+
+    };
+
+    //clear previous input
+    $("#thegifs").empty();
+
+    // Putting the gif on the page
+    $("#thegifs").append(gifDiv);
+  });
+
+};
+    
