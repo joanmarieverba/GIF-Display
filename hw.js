@@ -145,23 +145,22 @@ $(document).on("click", ".clickimage", switchGIFs);
 function switchGIFs() {
 
   let item = $(this).attr("item-name");
-  console.log("item-name ", item);
+  //n is the index of the item clicked
   let n = Number($(this).attr("gifindex"));
-  console.log("image clicked, ", n);
+  // still is 1 for still frame; 0 for animated
   let whichGIF = Number($(this).attr("still"));
-  console.log("Switch or not? ", whichGIF);
 
   let queryURL = "http://api.giphy.com/v1/gifs/search?q=" + item + "&api_key=Ebv1xRbHRFV9SafJDmTUY22Qy0LWjZzs&limit=10";
-  console.log(queryURL);
+
   // Creates AJAX call for the specific button being clicked
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-
+    console.log(response);
     // Creating a div to hold the gif (automatically supplies the </div> at the end)
     let gifDiv = $("<div class='picture'>");
-    console.log ("here");
+
     for (var i = 0; i < 10; i++) {
 
       let gifAndRatingDiv = $("<div class='gifplusrating'>");
@@ -180,16 +179,13 @@ function switchGIFs() {
         let imgURL = response.data[i].images.fixed_height.url;
         // Creating an element to hold the image
         image = $("<img>").attr("src", imgURL).addClass("clickimage").attr("gifindex", i).attr("item-name", item).attr("still", 0);
-        console.log("if");
       } else {
         //insert the still image
         let imgURL = response.data[i].images.original_still.url;
-        console.log("imgURL ", imgURL);
         // Creating an element to hold the image
         image = $("<img>").attr("src", imgURL).addClass("clickimage").attr("gifindex", i).attr("item-name", item).attr("still", 1);
-        console.log("else", image);
       };
-      console.log("imageswitch ", image);
+
 
       // Appending the image
       gifAndRatingDiv.append(image);
