@@ -130,6 +130,11 @@
 
           // Putting the gifs on the page
           $("#thegifs").append(gifDiv);
+        
+        })
+          .catch(function () {
+            console.log("$.get failed!");
+
         });
 
 
