@@ -30,7 +30,6 @@
 
       $(document).on("click", ".topbuttons", displayGIFs);
 
-
       // displayGIFs function re-renders the HTML to display the appropriate content
       function displayGIFs() {
 
@@ -57,7 +56,6 @@
             let aboveGIF = $("<p>").text(`Rating: ${gifRating}`);
             // Displaying the rating
             gifAndRatingDiv.append(aboveGIF);
-
 
             // Retrieving the URL for the gif
             let imgURL = response.data[i].images.original_still.url;
@@ -136,7 +134,6 @@
             console.log("$.get failed!");
 
         });
-
 
         // Calling renderButtons which adds the button to the top
         renderButtons();
