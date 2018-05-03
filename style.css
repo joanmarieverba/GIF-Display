@@ -51,6 +51,14 @@ img {
     width: 250px;
 }
 
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30px;
+    width: 250px;
+}
+
 .inputbutton {
     margin-top: 5px;
     float: right;
